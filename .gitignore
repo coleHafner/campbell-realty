@@ -31,7 +31,9 @@ node_modules
 .DS_Store
 
 #vagrant
-.vagrant
+/vagrant/config.rb
+/vagrant/provisions/config.sh
+/vagrant/.vagrant
 
 #ide files
 .idea

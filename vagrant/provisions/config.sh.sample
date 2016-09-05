@@ -1,0 +1,21 @@
+# ------------------------------------------------------------------------------------------------------------------
+# This file runs at the end of main provision, any local customization to your box's setup should happen here.
+# ------------------------------------------------------------------------------------------------------------------
+
+#install latest git
+sudo ./scripts/install-latest-git.sh
+
+#configure git aliases
+./scripts/git-aliases.sh
+
+#bump php memory/other settings
+sudo ./scripts/php-settings.sh
+
+#open up mysql server to remote connections
+sudo ./scripts/open-mysql.sh
+
+#make vim default editor
+./scripts/vim-default-editor.sh
+
+#symlink sites directory
+sudo ./scripts/symlink-sites.sh

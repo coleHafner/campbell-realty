@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#BASIC LOCAL GUEST CONFIGURATION
+LOCAL_ARGS = {
+	"guest_ip" => '192.168.11.133',
+	"guest_hostname" => '.dev',
+	"server_dir" => '',
+	"client_dir" => ''
+}
+
+#ADDITIONAL FANCYPANTS VAGRANT CONFIG
+Vagrant.configure(2) do |config|
+	config.ssh.forward_agent = true
+	config.vm.provider "virtualbox" do |v|
+	  v.name = LOCAL_ARGS['guest_hostname']
+	  v.memory = 2048
+	  v.cpus = 2
+	end
+end
