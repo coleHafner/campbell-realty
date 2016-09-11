@@ -1,0 +1,103 @@
+@import "bootstrap/bootstrap";
+@import "site/variables";
+
+.home {
+  padding: 0;
+  margin: 0;
+  
+  #header {
+	padding-top: 28px;
+	
+	h1 {
+	  padding-top: 0;
+	  margin-top: 0;
+	}
+  }
+  
+  #body {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 175px;
+	bottom: 0;
+	background-image: url(/images/house.jpeg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+
+	.container {
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  bottom: 80px;
+
+	  .big-nav {
+		position: relative;
+		display: flex;
+		bottom: 10px;
+
+		.item {
+		  flex: 1;
+		  padding: 10px;
+
+		  a {
+			position: relative;
+			display: block;
+			text-decoration: none;
+			background-color: rgba(255, 255, 255, 0.72);
+			width: 21vw;
+			height: 21vw;
+			text-align: center;
+			margin: auto;
+			min-width: 150px;
+			min-height: 150px;
+			max-width: 250px;
+			max-height: 250px;
+			border-radius: 3px;
+
+			.label {
+			  position: absolute;
+			  top: 50%;
+			  display: block;
+			  left: 50%;
+			  margin-left: -35px;
+			  margin-top: -35px;
+
+			  i {
+				font-size: 60px;
+				color: #000;
+			  }
+
+			  h4 {
+				color: #000;
+			  }
+			}
+		  }
+		}
+	  }
+	}
+  }
+}
+
+@media(max-width: 575px) {
+  .home {
+	#body {
+	  .container {
+		.big-nav {
+		  position: relative;
+		  display: block;
+		  bottom: 10px;
+
+		  .item {
+			margin: 0;
+			display: block;
+			a {
+			  width: 31vw;
+			  height: 31vw;
+			}
+		  }
+		}
+	  }
+	}
+  }
+}

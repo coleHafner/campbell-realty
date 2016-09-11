@@ -1,0 +1,29 @@
+extends ../layouts/home
+
+block content
+	//- HEADER
+	#header
+		h1 Eric Campbell
+		h4 Park City's premier real estate specialist.
+
+	//- BODY
+	#body: .container
+		&nbsp;
+		.big-nav
+			.item
+				a(href="/listings")
+					.label 
+						i.fa.fa-home
+						h4 Listings
+					
+			.item
+				a(href="/blog")
+					.label
+						i.fa.fa-rss-square 
+						h4 Blog
+					
+			.item
+				a(href="/contact")
+					.label
+						i.fa.fa-envelope-square
+						h4 Contact
