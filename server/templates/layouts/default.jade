@@ -33,7 +33,7 @@ html
 		block head
 
 	//- HTML BODY
-	body
+	body(class="#{section}")
 
 		//- HEADER
 		#header: .container
@@ -70,7 +70,8 @@ html
 			//- Remember to include it in your templates when you override the intro and content blocks!
 
 			//- The Intro block appears above flash messages (used for temporary information display)
-			block intro
+			.intro
+				block intro
 
 			//- Flash messages allow you to display once-off status messages to users, e.g. form
 			//- validation errors, success messages, etc.
@@ -97,6 +98,9 @@ html
 		//- Customise which Bootstrap javascript files are served by including
 		//- them specifically here, instead of bootstrap-3.3.5.min.js
 		script(src='/js/bootstrap/bootstrap-3.3.5.min.js')
+
+		//icon set
+		script(src='https://use.fontawesome.com/6bd4d8e5d4.js')
 
 		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
 		//- which generate links to edit content for users who can access Keystone

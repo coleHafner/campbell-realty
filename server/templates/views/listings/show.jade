@@ -1,0 +1,57 @@
+extends ../../layouts/default
+
+block intro
+	.container
+		if listing
+			.row.single
+				.col-sm-4.address
+						div 
+							span #{listing.address.street1}
+						div 
+							i
+								=listing.address.suburb
+								|, 
+								=listing.address.state 
+								| &nbsp;
+								=listing.address.postcode
+								
+				.col-sm-8
+					.row
+						.col-xs-3.price
+							span #{listing._.price.format('$0,0')}
+							br
+							i Price
+						.col-xs-3.bedrooms
+							span #{listing.numBedrooms}
+							br
+							i Bedrooms
+						.col-xs-3.bathrooms
+							span #{listing.numBathrooms}
+							br
+							i Bathrooms
+						.col-xs-3.sqft
+							span #{listing.sqFootage}
+							br
+							i Sq. Ft.
+				//a.pull-right.btn.btn-primary.header-btn(href="/listings")
+				//	//i.fa.fa-chevron-left &nbsp 
+				//	| All Listings
+			
+	
+block content
+	.container
+		if listing 
+			.row.single
+				.col-sm-8
+					.title-img(style="background-image: url(#{listing._.image.limit(680,680)});")
+						| &nbsp;
+				.col-sm-4.desc-wrapper
+					.inner 
+						div.title
+							h3 #{listing.title}
+							//span Status: #{listing.status}
+						div.desc 
+							!{listing.description.extended}
+block css 
+	link(href="/styles/listings.css", rel="stylesheet")
+	

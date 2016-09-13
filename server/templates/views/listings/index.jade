@@ -1,0 +1,28 @@
+extends ../../layouts/default
+
+block intro
+	.container
+		h1 Listings
+	
+block content
+	.container
+		if listings.length
+			each listing, index in listings
+				if (index % 3 === 0)
+					.row
+						each listing2, index2 in listings.slice(index, index + 3)
+							.col-sm-4.col-md-4
+								a.card(
+									href="/listings/#{listings[index + index2].slug}"
+									style="background-image:url('#{listings[index + index2]._.image.limit(680,680)}');"
+								)
+									.title
+										=listings[index + index2].title
+										|&nbsp;-&nbsp;
+										=listings[index + index2]._.price.format('$0,0')
+							
+		else
+			h3.text-muted There are no listings yet.
+
+block css 
+	link(href="/styles/listings.css", rel="stylesheet")
