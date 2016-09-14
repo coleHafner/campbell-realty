@@ -1,0 +1,20 @@
+@import "bootstrap/bootstrap";
+@import "site/variables";
+
+.blog {
+  
+	#body {
+	
+		.intro {
+			.container {
+				select.cat-selector {
+					max-width: 200px;
+				}
+				
+				.pagination {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+}

@@ -30,7 +30,7 @@ exports = module.exports = function (req, res) {
 			// Load the counts for each category
 			async.each(locals.data.categories, function (category, next) {
 
-				keystone.list('Listing').model.count().where('categories').in([category.id]).exec(function (err, count) {
+				keystone.list('Post').model.count().where('categories').in([category.id]).exec(function (err, count) {
 					category.postCount = count;
 					next(err);
 				});
@@ -57,9 +57,9 @@ exports = module.exports = function (req, res) {
 	// Load the posts
 	view.on('init', function (next) {
 
-		var q = keystone.list('Listing').paginate({
+		var q = keystone.list('Post').paginate({
 			page: req.query.page || 1,
-			perPage: 10,
+			perPage: 5,
 			maxPages: 10,
 			filters: {
 				state: 'published',
@@ -73,6 +73,7 @@ exports = module.exports = function (req, res) {
 		}
 
 		q.exec(function (err, results) {
+			console.log('GETTING POSTS', results);
 			locals.data.posts = results;
 			next(err);
 		});
