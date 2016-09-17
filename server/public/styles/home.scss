@@ -3,7 +3,8 @@
   margin: 0;
   
   #header {
-	padding-top: 28px;
+	min-height: 150px;
+	  padding-top: 28px;
 	
 	h1 {
 	  padding-top: 0;
@@ -76,10 +77,38 @@
   }
 }
 
+@media(max-height: 650px) {
+	.home {
+	  #body {
+		.container {
+		  .big-nav {
+			.item {
+			  a {
+			    width: 21vw;
+			    height: 21vw;
+			    min-width: 0;
+			    min-height: 0;
+			}
+		  }
+		}
+	  }
+	}
+  }
+}
+
 @media(max-width: 575px) {
   .home {
+	#header {
+		min-height: 100px;
+		padding-top: 10px;
+	}
+	
 	#body {
+		top: 75px;
+		
 	  .container {
+		bottom: 5px;
+		
 		.big-nav {
 		  position: relative;
 		  display: block;
@@ -89,8 +118,20 @@
 			margin: 0;
 			display: block;
 			a {
-			  width: 31vw;
-			  height: 31vw;
+			  
+			  .label {
+				min-width: 77px;
+				margin-left: -39px;
+				
+				i {
+				  font-size: 30px;
+				  color: #000;
+				}
+
+				h4 {
+				  color: #000;
+				}
+			  }
 			}
 		  }
 		}
