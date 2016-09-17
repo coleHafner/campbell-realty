@@ -1,0 +1,23 @@
+extends ../../layouts/default
+
+block content
+		article
+			if !data.post
+				h2 Invalid Post.
+			else
+				.container-fluid.post-title
+					.row: .col-sm-12
+						header
+							h1= data.post.title
+							if data.post.publishedDate
+								h5
+									| Posted: #{data.post._.publishedDate.format('MMMM Do, YYYY')} 
+				.container
+					.row: .col-sm-12
+						.post
+							if data.post.image.exists
+								.image-wrap: img.pull-left(style="margin-right:10px;margin-bottom:10px;", src=data.post._.image.fit(750,450)).img-responsive
+							!= data.post.content.full
+
+block css
+	link(href="/styles/blog.css", rel="stylesheet")

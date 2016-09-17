@@ -82,11 +82,17 @@ html
 
 
 		//- FOOTER
-		.container: #footer
-
-			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
-			p Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
-
+		.container-fluid.footer
+			.container
+				.row
+					.col-md-4
+						<h5>Links</h5>
+						ul
+							li: a(href="/") Home
+							each link in navLinks
+								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
+						
+							
 
 		//- JAVASCRIPT
 

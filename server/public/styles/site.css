@@ -5866,6 +5866,14 @@ button.close {
     top: 10px;
     right: 10px; }
 
+.footer {
+  background-color: #111;
+  padding-top: 20px;
+  margin-top: 50px;
+  min-height: 250px; }
+  .footer #footer {
+    border: 0; }
+
 @media (max-width: 768px) {
   #body h1 {
     text-align: center; } }
