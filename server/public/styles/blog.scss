@@ -2,13 +2,21 @@
 @import "site/variables";
 
 .blog {
+	.container-fluid.post-title {
+		background-color: #337ab7;
+		padding: 113px;
+		color: #fff;
+		text-align: center;
+		margin-bottom: 20px;
+		margin-top: 20px;
+	}
   
 	#body {
 	
 		.intro {
 			.container {
 				select.cat-selector {
-					max-width: 200px;
+					max-width: 130px;
 				}
 				
 				.pagination {

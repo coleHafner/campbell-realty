@@ -8,39 +8,43 @@ exports = module.exports = function (req, res) {
 	// Set locals
 	locals.section = 'blog';
 	locals.filters = {
-		post: req.params.post,
+		post: req.params.post
 	};
 	locals.data = {
-		posts: [],
+		posts: []
 	};
 
 	// Load the current post
 	view.on('init', function (next) {
 
-		var q = keystone.list('Post').model.findOne({
-			state: 'published',
-			slug: locals.filters.post,
-		}).populate('author categories');
-
-		q.exec(function (err, result) {
-			locals.data.post = result;
-			next(err);
-		});
-
-	});
-
-	// Load other posts
-	view.on('init', function (next) {
-
-		var q = keystone.list('Post').model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
-
-		q.exec(function (err, results) {
-			locals.data.posts = results;
-			next(err);
-		});
-
+		keystone.list('Post')
+			.model
+			.findOne({
+				state: 'published',
+				slug: locals.filters.post,
+			})
+			.populate('author categories')
+			.exec()
+			.then(function (err, result) {
+				locals.data.post = result;
+		
+				return keystone.list('Post')
+					.model
+					.find()
+					.where('state', 'published')
+					.sort('-publishedDate')
+					.populate('author')
+					.limit('4')
+					.exec();
+			})
+			.then(function(err, results) {
+				locals.data.posts = results;
+			})
+			.finally(function() {
+				next();
+			});
 	});
 
 	// Render the view
-	view.render('post');
+	view.render('blog/show');
 };
