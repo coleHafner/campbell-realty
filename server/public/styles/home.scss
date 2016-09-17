@@ -77,15 +77,15 @@
   }
 }
 
-@media(max-height: 650px) {
+@media(max-height: 635px) {
 	.home {
 	  #body {
 		.container {
 		  .big-nav {
 			.item {
 			  a {
-			    width: 21vw;
-			    height: 21vw;
+			    width: 27vw;
+			    height: 27vw;
 			    min-width: 0;
 			    min-height: 0;
 			}
@@ -104,7 +104,7 @@
 	}
 	
 	#body {
-		top: 75px;
+		top: 85px;
 		
 	  .container {
 		bottom: 5px;

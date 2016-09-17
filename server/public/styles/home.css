@@ -56,10 +56,17 @@
               .home #body .container .big-nav .item a .label h4 {
                 color: #000; }
 
-@media (max-height: 650px) {
+@media (max-height: 500px) {
   .home #body .container .big-nav .item a {
     width: 21vw;
     height: 21vw;
+    min-width: 0;
+    min-height: 0; } }
+
+@media (max-height: 635px) {
+  .home #body .container .big-nav .item a {
+    width: 27vw;
+    height: 27vw;
     min-width: 0;
     min-height: 0; } }
 
@@ -68,7 +75,7 @@
     min-height: 100px;
     padding-top: 10px; }
   .home #body {
-    top: 75px; }
+    top: 85px; }
     .home #body .container {
       bottom: 5px; }
       .home #body .container .big-nav {
