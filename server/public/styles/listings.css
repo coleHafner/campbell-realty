@@ -5829,20 +5829,21 @@ button.close {
   .listings #body .intro .container .row.single i {
     color: #999; }
 
-.listings #body .container .row.single .desc-wrapper {
-  min-height: 400px;
-  background-color: #efefef; }
-  .listings #body .container .row.single .desc-wrapper .inner {
-    padding: 15px; }
-    .listings #body .container .row.single .desc-wrapper .inner h3 {
-      padding-top: 0;
-      margin-top: 0; }
-
-.listings #body .container .row.single .title-img {
-  min-height: 400px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover; }
+.listings #body .container .row.single {
+  margin-top: 10px; }
+  .listings #body .container .row.single .desc-wrapper {
+    min-height: 400px;
+    background-color: #efefef; }
+    .listings #body .container .row.single .desc-wrapper .inner {
+      padding: 15px; }
+      .listings #body .container .row.single .desc-wrapper .inner h3 {
+        padding-top: 0;
+        margin-top: 0; }
+  .listings #body .container .row.single .title-img {
+    min-height: 400px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; }
 
 .listings #body .container .row a.card {
   position: relative;
