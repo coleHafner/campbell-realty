@@ -7,7 +7,8 @@
  * you have more middleware you may want to group it as separate
  * modules in your project's /lib directory.
  */
-var _ = require('lodash');
+var _ = require('lodash'),
+	keystone = require('keystone');
 
 
 /**
@@ -18,13 +19,26 @@ var _ = require('lodash');
 	or replace it with your own templates / logic.
 */
 exports.initLocals = function (req, res, next) {
+	
 	res.locals.navLinks = [
 		//{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Listings', key: 'listings', href: '/listings' },
 		{ label: 'Blog', key: 'blog', href: '/blog' },
 		{ label: 'Contact', key: 'contact', href: '/contact' },
 	];
+	
 	res.locals.user = req.user;
+	
+	res.locals.latest = {
+		posts: [],
+		listings: []
+	};
+	
+	res.locals.contact = {
+		phone: '5555551212',
+		email: 'eric@blueroof.com'
+	};
+	
 	next();
 };
 
@@ -54,4 +68,29 @@ exports.requireUser = function (req, res, next) {
 	} else {
 		next();
 	}
+};
+
+exports.getLatest = function(req, res, next) {
+	keystone.list('Post')
+		.model
+		.find()
+		.where('state', 'published')
+		.sort('-publishedDate')
+		.limit('5')
+		.exec()
+		.then(function(latest) {
+			res.locals.latest.posts = latest;
+	
+			return keystone.list('Listing')
+				.model
+				.find()
+				.sort('-createdAt')
+				.limit('5')
+				.exec();
+		}).then(function(latest) {
+			res.locals.latest.listings = latest;
+			next();
+		}, function(err) {
+			next();
+		});
 };
