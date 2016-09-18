@@ -27,7 +27,7 @@
 	  position: absolute;
 	  left: 0;
 	  right: 0;
-	  bottom: 80px;
+	  bottom: 10px;
 
 	  .big-nav {
 		position: relative;
@@ -49,9 +49,10 @@
 			margin: auto;
 			min-width: 150px;
 			min-height: 150px;
-			max-width: 250px;
-			max-height: 250px;
+			max-width: 150px;
+			max-height: 150px;
 			border-radius: 3px;
+			border: 1px solid #999;
 
 			.label {
 			  position: absolute;

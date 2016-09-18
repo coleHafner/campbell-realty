@@ -21,7 +21,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 80px; }
+      bottom: 10px; }
       .home #body .container .big-nav {
         position: relative;
         display: flex;
@@ -40,9 +40,10 @@
             margin: auto;
             min-width: 150px;
             min-height: 150px;
-            max-width: 250px;
-            max-height: 250px;
-            border-radius: 3px; }
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 3px;
+            border: 1px solid #999; }
             .home #body .container .big-nav .item a .label {
               position: absolute;
               top: 50%;
