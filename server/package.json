@@ -26,7 +26,8 @@
     "node-sass": "^3.9.3",
     "open": "0.0.5",
     "sendgrid": "^4.3.0",
-    "time-grunt": "^0.3.1"
+    "time-grunt": "^0.3.1",
+    "mongoose": "~4.6.0"
   },
   "scripts": {
     "lint": "eslint .",
