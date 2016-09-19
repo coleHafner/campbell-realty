@@ -5,6 +5,9 @@ block content
 			if !data.post
 				h2 Invalid Post.
 			else
+				.container.go-back 
+					.row: .col-sm-12
+						a.fa.fa-arrow-circle-left(href="/blog") &nbsp; View all posts
 				.container-fluid.post-title
 					.row: .col-sm-12
 						header

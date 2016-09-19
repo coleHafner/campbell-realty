@@ -41,6 +41,7 @@ exports = module.exports = function (app) {
 	app.get('/listings', routes.views.listings);
 	app.get('/listings/:slug', routes.views.listings);
 	app.all('/contact', routes.views.contact);
+	app.all('/contact/:listingSlug', routes.views.contact);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

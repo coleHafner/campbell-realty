@@ -1,6 +1,10 @@
 extends ../../layouts/default
 
 block intro
+	.container.go-back 
+		.row: .col-sm-12
+			a.fa.fa-arrow-circle-left(href="/listings") &nbsp; View all listings
+			hr
 	.container
 		if listing
 			.row.single
@@ -33,10 +37,6 @@ block intro
 							span #{listing.sqFootage}
 							br
 							i Sq. Ft.
-				//a.pull-right.btn.btn-primary.header-btn(href="/listings")
-				//	//i.fa.fa-chevron-left &nbsp 
-				//	| All Listings
-			
 	
 block content
 	.container
@@ -52,6 +52,9 @@ block content
 							//span Status: #{listing.status}
 						div.desc 
 							!{listing.description.extended}
+						a.btn.btn-primary.btn-block.btn-contact(href='/contact/' + listing.slug)
+							i.fa.fa-envelope
+							| &nbsp; Contact Eric About This Home
 block css 
 	link(href="/styles/listings.css", rel="stylesheet")
 	

@@ -5844,6 +5844,8 @@ button.close {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover; }
+  .listings #body .container .row.single .btn.btn-contact {
+    margin-top: 25px; }
 
 .listings #body .container .row a.card {
   position: relative;

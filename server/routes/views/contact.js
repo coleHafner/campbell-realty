@@ -1,17 +1,42 @@
-var keystone = require('keystone');
-var Enquiry = keystone.list('Enquiry');
+var keystone = require('keystone'),
+	Enquiry = keystone.list('Enquiry'),
+	_ = require('lodash');
 
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res);
-	var locals = res.locals;
 
 	// Set locals
-	locals.section = 'contact';
-	locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
-	locals.formData = req.body || {};
-	locals.validationErrors = {};
-	locals.enquirySubmitted = false;
+	res.locals.section = 'contact';
+	res.locals.enquiryTypes = Enquiry.fields.enquiryType.ops;
+	res.locals.formData = req.body || {};
+	res.locals.validationErrors = {};
+	res.locals.enquirySubmitted = false;
+	res.locals.listing = '';
+	
+	view.on('init', function(next) {
+		if (req.params.listingSlug && _.isUndefined(res.locals.formData.message)) {
+			keystone.list('Listing')
+				.model
+				.findOne({
+					slug: req.params.listingSlug
+				})
+				.exec()
+				.then(function(listing) {
+					var ad = listing.address,
+						message = 'Hey Eric, I\'m interested in ';
+						message += ad.street1 + ' ' + ad.suburb + ', ' + ad.state;
+						
+					res.locals.listing = listing;
+					res.locals.formData.message = message;
+					next();
+				}, function(err) {
+					console.log('err retrieving listing', err);
+					next();
+				});
+		}
+		next();
+	});
 
 	// On POST requests, add the Enquiry item to the database
 	view.on('post', { action: 'contact' }, function (next) {
@@ -22,12 +47,12 @@ exports = module.exports = function (req, res) {
 		updater.process(req.body, {
 			flashErrors: true,
 			fields: 'name, email, phone, enquiryType, message',
-			errorMessage: 'There was a problem submitting your enquiry:',
+			errorMessage: 'There was a problem submitting your enquiry:'
 		}, function (err) {
 			if (err) {
-				locals.validationErrors = err.errors;
+				res.locals.validationErrors = err.errors;
 			} else {
-				locals.enquirySubmitted = true;
+				res.locals.enquirySubmitted = true;
 			}
 			next();
 		});

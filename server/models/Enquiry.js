@@ -1,5 +1,6 @@
-var keystone = require('keystone');
-var Types = keystone.Field.Types;
+var keystone = require('keystone'),
+	sg = require('sendgrid'),
+	Types = keystone.Field.Types;
 
 /**
  * Enquiry Model
@@ -40,22 +41,70 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 		callback = function () {};
 	}
 	var enquiry = this;
-	keystone.list('User').model.find().where('isAdmin', true).exec(function (err, admins) {
-		if (err) return callback(err);
-		new keystone.Email({
-			templateName: 'enquiry-notification',
-		}).send({
-			to: admins,
-			from: {
-				name: 'Campbell Realty',
-				email: 'contact@campbell-realty.com',
-			},
-			subject: 'New Enquiry for Campbell Realty',
-			enquiry: enquiry,
-		}, callback);
-	});
+	keystone.list('User')
+		.model
+		.findOne()
+		.where('isAdmin', true)
+		.exec(function (err, admins) {
+			if (err) return callback(err);
+			sendEmail({
+				to: admins,
+				enquiry: enquiry
+			});
+		});
 };
 
 Enquiry.defaultSort = '-createdAt';
 Enquiry.defaultColumns = 'name, email, enquiryType, createdAt';
 Enquiry.register();
+
+function sendEmail(opts) {
+	
+	var from = {
+		name: 'Campbell Realty',
+		email: 'contact@campbell-realty.com',
+	};
+			
+	var content = '<p> Hey there. You have a new message!</p>';
+		content += 'Name: ' + (opts.enquiry.name.first || '') + ' ' + (opts.enquiry.name.last || '');
+		content += '<br/>';
+		content += 'Email: ' + opts.enquiry.email;
+		content += '<br/>';
+		content += 'Enquiry Type: ' + (opts.enquiry.enquiryType || 'NA');
+		content += '<br/>';
+		content += 'Phone: ' + (opts.enquiry.phone || 'NA');
+		content += '<br/><br/>';
+		content += 'Message: ' + opts.enquiry.message.html;
+	
+	var helper = sg.mail;
+		from_email = new helper.Email(from.email, from.name);
+		to_email = new helper.Email(opts.to.email);
+		subject = 'You have a new enquiry';
+		content = new helper.Content('text/html', content);
+		mail = new helper.Mail(from_email, subject, to_email, content),
+		sender = sg(process.env.SENDGRID_API_KEY),
+		mailOpts = mail.toJSON(),
+		request = sender.emptyRequest({
+			method: 'POST',
+			path: '/v3/mail/send',
+			body: mailOpts
+		});
+
+	sender.API(request, function(error, response) {
+	  console.log(response.statusCode);
+	  console.log(response.body);
+	  console.log(response.headers);
+	});
+		
+//	new keystone.Email({
+//		templateName: 'enquiry-notification',
+//	}).send({
+//		to: admins,
+//		from: {
+//			name: 'Campbell Realty',
+//			email: 'contact@campbell-realty.com',
+//		},
+//		subject: 'New Enquiry for Campbell Realty',
+//		enquiry: enquiry,
+//	}, callback);
+}

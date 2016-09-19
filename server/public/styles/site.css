@@ -5858,6 +5858,10 @@ button.close {
 
 #body {
   margin-top: 5px; }
+  #body .go-back {
+    margin-top: 26px; }
+    #body .go-back a {
+      font-size: 16px; }
 
 .intro {
   position: relative; }
@@ -5876,7 +5880,7 @@ button.close {
   .footer ul {
     list-style: none;
     margin: 0;
-    padding: 0 0 0 12px; }
+    padding: 0; }
     .footer ul li {
       margin: 0;
       padding: 0 0 5px 0; }
