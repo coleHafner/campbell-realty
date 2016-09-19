@@ -90,15 +90,21 @@ html
 								li: a(href=link.href)= link.label
 					.col-sm-3
 						<h5>Latest Listings</h5>
-						ul
-							each listing in latest.listings
-								li: a(href="listings/" + listing.slug)= listing.title
+						if !latest.listings.length
+							There are 0 listings
+						else
+							ul
+								each listing in latest.listings
+									li: a(href="/listings/" + listing.slug)= listing.title
 
 					.col-sm-3
 						<h5>Latest Posts</h5>
-						ul
-							each post in latest.posts
-								li: a(href="blog/" + post.slug)= post.title
+						if !latest.posts.length
+							There are 0 posts
+						else
+							ul
+								each post in latest.posts
+									li: a(href="/blog/" + post.slug)= post.title
 
 					.col-sm-3
 						<h5>Contact Eric</h5>
