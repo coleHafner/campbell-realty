@@ -5,28 +5,30 @@ var keystone = require('keystone'),
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res),
-		locals = res.locals,
 		hasSlug = !_.isUndefined(req.params.slug),
 		action = hasSlug ? 'show' : 'index'; 
 
 	// Init locals
-	locals.section = 'blog';
+	res.locals.section = 'blog';
 	
 	if (hasSlug) {
-		locals.filters = {
+		res.locals.filters = {
 			post: req.params.slug,
 		};
 		
-		locals.data = {
-			posts: [],
+		res.locals.data = {
+			posts: []
 		};
 		
+		res.locals.layoutOpts.hideSidebar = true;
+		console.log('res.locals set...', res.locals);
+		
 	}else {
-		locals.filters = {
+		res.locals.filters = {
 			category: req.params.category,
 		};
 
-		locals.data = {
+		res.locals.data = {
 			posts: [],
 			categories: [],
 		};
@@ -46,7 +48,7 @@ exports = module.exports = function (req, res) {
 				.populate('author categories')
 				.exec()
 				.then(function (result) {
-					locals.data.post = result;
+					res.locals.data.post = result;
 					return keystone.list('Post')
 						.model
 						.find()
@@ -57,7 +59,7 @@ exports = module.exports = function (req, res) {
 						.exec();
 				})
 				.then(function(results) {
-					locals.data.posts = results;
+					res.locals.data.posts = results;
 					next();
 				}, function(err) {
 					next(err);
@@ -69,10 +71,10 @@ exports = module.exports = function (req, res) {
 				.sort('name')
 				.exec()
 				.then(function (results) {
-					locals.data.categories = results;
+					res.locals.data.categories = results;
 					
 					// Load the counts for each category
-					async.each(locals.data.categories, function (category, next) {
+					async.each(res.locals.data.categories, function (category, next) {
 						keystone.list('Post')
 							.model
 							.count()
@@ -87,22 +89,22 @@ exports = module.exports = function (req, res) {
 					if (req.params.category) {
 						return keystone.list('PostCategory')
 							.model
-							.findOne({ key: locals.filters.category })
+							.findOne({ key: res.locals.filters.category })
 							.exec();
 					}
 				})
 				.then(function(maybeCategory) {
 					
 					if (maybeCategory && req.params.category) {
-						locals.data.category = maybeCategory;
+						res.locals.data.category = maybeCategory;
 					}
 					
-					console.log('locals.data.category ', locals.data.category );
+					console.log('locals.data.category ', res.locals.data.category );
 			
 					var q = keystone.list('Post')
 						.paginate({
 							page: req.query.page || 1,
-							perPage: 5,
+							perPage: 10,
 							maxPages: 10,
 							filters: {
 								state: 'published'
@@ -111,13 +113,12 @@ exports = module.exports = function (req, res) {
 						.sort('-publishedDate')
 						.populate('author categories');
 
-					if (locals.data.category) {
-						q.where('categories').in([locals.data.category]);
-						console.log('FILTERING FOR CATS');
+					if (res.locals.data.category) {
+						q.where('categories').in([res.locals.data.category]);
 					}
 					
 					q.exec(function (err, results) {
-						locals.data.posts = results;
+						res.locals.data.posts = results;
 						next(err);
 					});
 				});

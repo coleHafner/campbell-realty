@@ -35,8 +35,12 @@ exports.initLocals = function (req, res, next) {
 	};
 	
 	res.locals.contact = {
-		phone: '5555551212',
+		phone: '(555) 555-1212',
 		email: 'eric@blueroof.com'
+	};
+	
+	res.locals.layoutOpts = {
+		hideSidebar: false
 	};
 	
 	next();

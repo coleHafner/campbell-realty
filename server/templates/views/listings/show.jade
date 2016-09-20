@@ -3,7 +3,9 @@ extends ../../layouts/default
 block intro
 	.container.go-back 
 		.row: .col-sm-12
-			a.fa.fa-arrow-circle-left(href="/listings") &nbsp; View all listings
+			a(href="/listings") 
+				i.fa.fa-arrow-circle-left 
+				| &nbsp;View all listings
 			hr
 	.container
 		if listing

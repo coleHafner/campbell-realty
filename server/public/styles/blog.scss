@@ -13,17 +13,13 @@
 	}
   
 	#body {
-	
-		.intro {
-			.container {
-				select.cat-selector {
-					max-width: 130px;
-				}
-				
-				.pagination {
-					margin-top: 0;
-				}
-			}
+		select.cat-selector {
+			max-width: 130px;
+			float: right;
+		}
+
+		.pagination {
+			margin-top: 0;
 		}
 	}
 }

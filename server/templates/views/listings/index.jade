@@ -1,29 +1,47 @@
 extends ../../layouts/default
 
+mixin pagination(listings)
+	ul.pagination
+		if listings.previous
+			li: a(href='?page=' + listings.previous): span.glyphicon.glyphicon-chevron-left
+		else
+			li.disabled: a(href='?page=' + 1): span.glyphicon.glyphicon-chevron-left
+		each p, i in listings.pages
+			li(class=listings.currentPage == p ? 'active' : null)
+				a(href='?page=' + (p == '...' ? (i ? listings.totalPages : 1) : p ))= p
+		if listings.next
+			li: a(href='?page=' + listings.next): span.glyphicon.glyphicon-chevron-right
+		else
+			li.disabled: a(href='?page=' + listings.totalPages): span.entypo.glyphicon.glyphicon-chevron-right
+
 block intro
 	.container
 		h1 Listings
 		hr
 	
 block content
-	.container
-		if listings.length
-			each listing, index in listings
-				if (index % 3 === 0)
-					.row
-						each listing2, index2 in listings.slice(index, index + 3)
-							.col-sm-4.col-md-4
-								a.card(
-									href="/listings/#{listings[index + index2].slug}"
-									style="background-image:url('#{listings[index + index2]._.image.limit(680,680)}');"
-								)
-									.title
-										=listings[index + index2].title
-										|&nbsp;-&nbsp;
-										=listings[index + index2]._.price.format('$0,0')
-							
-		else
-			h3.text-muted There are no listings yet.
+	if listings && listings.totalPages > 1
+		+pagination(listings)
+
+	if listings.results.length
+		each listing, index in listings.results
+			if (index % 3 === 0)
+				.row
+					each listing2, index2 in listings.results.slice(index, index + 3)
+						.col-sm-4
+							a.card(
+								href="/listings/#{listings.results[index + index2].slug}"
+								style="background-image:url('#{listings.results[index + index2]._.image.limit(680,680)}');"
+							)
+								.title
+									=listings.results[index + index2].title
+									|&nbsp;-&nbsp;
+									=listings.results[index + index2]._.price.format('$0,0')
+		if listings.totalPages > 1
+			+pagination(listings)
+
+	else
+		h3.text-muted There are no listings yet.
 
 block css 
 	link(href="/styles/listings.css", rel="stylesheet")

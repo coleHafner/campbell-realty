@@ -4,7 +4,6 @@ var keystone = require('keystone'),
 exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res),
-		Listing = keystone.list('Listing'),
 		hasSlug = !_.isUndefined(req.params.slug),
 		action = hasSlug ? 'show' : 'index'; 
 	
@@ -13,7 +12,12 @@ exports = module.exports = function (req, res) {
 	view.on('init', function (next) {
 	
 		if (hasSlug) {
-			Listing.model
+			
+			res.locals.layoutOpts.hideSidebar = true;
+			
+			keystone
+				.list('Listing')
+				.model
 				.findOne()
 				.where('slug', req.params.slug)
 				.sort('sortOrder')
@@ -24,11 +28,15 @@ exports = module.exports = function (req, res) {
 				});
 		}else {
 			// Load the galleries by sortOrder
-			Listing.model
-				.find()
+			keystone
+				.list('Listing')
+				.paginate({
+					page: req.query.page || 1,
+					perPage: 9,
+					maxPages: 10
+				})
 				.sort('sortOrder')
-				.exec()
-				.then(function(listings) {
+				.exec(function(err, listings) {
 					console.log('LISTINGS', listings);
 					res.locals.listings = listings;
 					next();

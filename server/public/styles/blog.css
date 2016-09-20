@@ -5830,8 +5830,9 @@ button.close {
   margin-bottom: 20px;
   margin-top: 20px; }
 
-.blog #body .intro .container select.cat-selector {
-  max-width: 130px; }
+.blog #body select.cat-selector {
+  max-width: 130px;
+  float: right; }
 
-.blog #body .intro .container .pagination {
+.blog #body .pagination {
   margin-top: 0; }

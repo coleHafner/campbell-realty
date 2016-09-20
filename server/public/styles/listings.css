@@ -5821,13 +5821,12 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.listings #body .intro {
-  margin-bottom: 10px; }
-  .listings #body .intro .container .row.single span {
-    font-weight: bold;
-    font-size: 18px; }
-  .listings #body .intro .container .row.single i {
-    color: #999; }
+.listings #body .intro .container .row.single span {
+  font-weight: bold;
+  font-size: 18px; }
+
+.listings #body .intro .container .row.single i {
+  color: #999; }
 
 .listings #body .container .row.single {
   margin-top: 10px; }

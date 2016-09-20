@@ -49,15 +49,12 @@ html
 							span.icon-bar
 							span.icon-bar
 							span.icon-bar
-						a.navbar-brand(href='/') Campbell Realty
+						a.navbar-brand(href='/') Eric Campbell Realtor
 					.collapse.navbar-collapse
 						ul.nav.navbar-nav.navbar-right
 							each link in navLinks
 								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
-							li
-								a(href='tel:' + contact.phone)
-									i.fa.fa-phone 
-									| &nbsp; Call Now
+								
 
 		//- BODY
 		#body
@@ -75,7 +72,25 @@ html
 			+flash-messages(messages)
 
 			//- The content block should contain the body of your template's content
-			block content
+			if layoutOpts.hideSidebar === true
+				block content
+			else
+				.container
+					.row
+						.col-sm-9.content
+							.row
+								.col-xs-12
+									block content
+
+						.col-sm-3.sidebar.hidden-xs
+							.img-container
+							h2 Eric Campbell
+							h5 Serving Park City, Heber Valley <br/> and Salt Lake Valley
+							a(href='tel:' + contact.phone)
+								i.fa.fa-phone 
+								| &nbsp; #{contact.phone}
+
+			
 
 
 		//- FOOTER
@@ -127,6 +142,11 @@ html
 
 		//icon set
 		script(src='https://use.fontawesome.com/6bd4d8e5d4.js')
+
+		script.
+			if ($('.sidebar')) {
+				$('.sidebar').height($('.content').height());
+			}
 
 		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
 		//- which generate links to edit content for users who can access Keystone

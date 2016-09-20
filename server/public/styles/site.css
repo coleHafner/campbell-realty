@@ -5862,6 +5862,40 @@ button.close {
     margin-top: 26px; }
     #body .go-back a {
       font-size: 16px; }
+  #body .sidebar {
+    /*
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		border-right-width: 0;
+		border-top-width: 0;
+		border-bottom-width: 0;
+		*/
+    text-align: center;
+    /*background-color: #efefef;*/
+    padding: 20px 10px; }
+    #body .sidebar a {
+      font-size: 16px; }
+    #body .sidebar h5 {
+      line-height: 20px; }
+    #body .sidebar div.img-container {
+      padding: 10px;
+      background-color: #337ab7;
+      background-image: url(/images/profile-pic-blended.jpg);
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: 10px solid #337ab7;
+      margin: auto;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px; }
+  #body hr {
+    margin-bottom: 5px !important; }
+  #body .pagination {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important; }
+  #body .intro {
+    margin-bottom: 10px; }
 
 .intro {
   position: relative; }

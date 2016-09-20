@@ -14,7 +14,7 @@ mixin post(post)
 			p.read-more: a(href='/blog/' + post.slug) Read more...
 
 mixin pagination(data)
-	ul.pagination.pull-right
+	ul.pagination
 		if data.posts.previous
 			li: a(href='?page=' + data.posts.previous): span.glyphicon.glyphicon-chevron-left
 		else
@@ -31,34 +31,31 @@ block intro
 	.container
 		h1= data.category ? data.category.name : 'Blog'
 		hr
-		if data.posts.results.length
-			if data.posts.totalPages > 1
-				+pagination(data)
-			if data.categories.length
-				select.form-control.cat-selector(onchange="var goTo = '/blog' + (this.value ? '/category/' + this.value : ''); window.location.href=goTo; return false;")
-					option(value="", selected=(!data.category)) All Categories
-					each cat in data.categories
-						option(value="#{cat.key}", selected=(data.category && data.category.id == cat.id)) #{cat.name}
-			
 
 block content
-	.container
-		.row
-			.col-xs-12
-				if filters.category && !data.category
-					h3.text-muted Invalid Category.
-				else
-					if data.posts.results.length
-						.blog
-							each post in data.posts.results
-								+post(post)
-					else
-						if data.category
-							h3.text-muted There are no posts in the category #{data.category.name}.
-						else
-							h3.text-muted There are no posts yet.
-		if data.posts.totalPages > 1
-			+pagination(data)
+	if data.posts.totalPages > 1
+		+pagination(data)
+
+	if data.categories.length
+		select.form-control.cat-selector(onchange="var goTo = '/blog' + (this.value ? '/category/' + this.value : ''); window.location.href=goTo; return false;")
+			option(value="", selected=(!data.category)) All Categories
+			each cat in data.categories
+				option(value="#{cat.key}", selected=(data.category && data.category.id == cat.id)) #{cat.name}
+
+	if filters.category && !data.category
+		h3.text-muted Invalid Category.
+	else
+		if data.posts.results.length
+			.blog
+				each post in data.posts.results
+					+post(post)
+		else
+			if data.category
+				h3.text-muted There are no posts in the category #{data.category.name}.
+			else
+				h3.text-muted There are no posts yet.
+	if data.posts.totalPages > 1
+		+pagination(data)
 
 block css
 	link(href="/styles/blog.css", rel="stylesheet")
