@@ -2,9 +2,16 @@ extends ../layouts/home
 
 block content
 	//- HEADER
-	#header
-		h1 Eric Campbell
-		h4 Serving Park City, Heber Valley and Salt Lake Valley
+	#header.home
+		.container-fluid
+			.row
+				.col-sm-4.hidden-xs
+					.img-container &nbsp;
+				.col-sm-4
+					h1 Eric Campbell
+					h4 Serving Park City, Heber Valley and Salt Lake Valley
+				.col-sm-4.hidden-xs
+					img(src="/images/blueroof-logo.png", style="max-width: 200px;")
 
 	//- BODY
 	#body: .container

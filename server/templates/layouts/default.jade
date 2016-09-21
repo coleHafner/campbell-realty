@@ -86,9 +86,12 @@ html
 							.img-container
 							h2 Eric Campbell
 							h5 Serving Park City, Heber Valley <br/> and Salt Lake Valley
-							a(href='tel:' + contact.phone)
-								i.fa.fa-phone 
+							a(href='tel:' + contact.phone, style="display: block; margin-bottom: 5px;")
+								i.fa.fa-mobile-phone 
 								| &nbsp; #{contact.phone}
+							a(href='tel:' + contact.email)
+								i.fa.fa-envelope-o
+								| &nbsp; #{contact.email}
 
 			
 
@@ -126,6 +129,9 @@ html
 						ul
 							li: a(href='mailto:' + contact.email) Email
 							li: a(href='tel:' + contact.phone) Call
+				.row
+					.col-sm-12(style="text-align:center;margin-top: 20px;")
+						img(src="/images/blueroof-logo.png", style="max-width: 250px;")
 						
 							
 

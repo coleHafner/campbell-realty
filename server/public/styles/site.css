@@ -5855,6 +5855,12 @@ button.close {
     #header ul.navbar-nav li a {
       padding-top: 8px;
       padding-bottom: 8px; }
+  #header .img-container {
+    max-width: 120px;
+    max-height: 120px;
+    border-width: 5px;
+    top: -16px;
+    position: relative; }
 
 #body {
   margin-top: 5px; }
@@ -5877,18 +5883,6 @@ button.close {
       font-size: 16px; }
     #body .sidebar h5 {
       line-height: 20px; }
-    #body .sidebar div.img-container {
-      padding: 10px;
-      background-color: #337ab7;
-      background-image: url(/images/profile-pic-blended.jpg);
-      background-position: center center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      border: 10px solid #337ab7;
-      margin: auto;
-      border-radius: 50%;
-      width: 150px;
-      height: 150px; }
   #body hr {
     margin-bottom: 5px !important; }
   #body .pagination {
@@ -5903,6 +5897,19 @@ button.close {
     position: absolute;
     top: 10px;
     right: 10px; }
+
+.img-container {
+  background-color: #fff;
+  background-image: url(/images/profile-pic-blended.jpg);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 5px solid #337ab7;
+  /* #243b71; */
+  margin: auto;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px; }
 
 .footer {
   background-color: #efefef;
