@@ -1,0 +1,29 @@
+mixin head-content()
+	meta(charset="utf-8")
+	meta(name="viewport", content="width=device-width, initial-scale=1.0")
+	meta(http-equiv="X-UA-Compatible" content="IE=edge")
+	meta(description="Eric Campbell real estate agent. Serving Utah: Park City, Herber Valley and Salt Lake Valley")
+
+	- var shinySection = section.split(' ').map(function(word) { return word.charAt(0).toUpperCase() + word.substr(1); }).join(' ');
+	title= 'Utah Real Estate | Park City, Herber Valley and Salt Lake Valley | Eric Campbell | ' + shinySection
+	link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+
+	//- Customise the stylesheet for your site by editing /public/styles/site.sass
+	link(href="/styles/site.css", rel="stylesheet")
+
+	//- This file provides the default styling for the KeystoneJS Content Editor
+	if user && user.canAccessKeystone
+		link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
+
+	//- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+	//- Safely remove this block if you are not targeting IE8
+	//-[if lt IE 9]
+		script(src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js")
+		script(src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js")
+	//-[endif]
+
+	//- Include template-specific stylesheets by extending the css block
+	block css
+
+	//- Add any other template-specific HEAD tags by extending the head block
+	block head

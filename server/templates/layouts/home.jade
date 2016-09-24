@@ -1,33 +1,12 @@
 include ../mixins/flash-messages
+include ../mixins/head-content
 
 doctype html
 html
 
 	//- HTML HEADER
 	head
-		meta(charset="utf-8")
-		meta(name="viewport", content="width=device-width, initial-scale=1.0")
-		meta(http-equiv="X-UA-Compatible" content="IE=edge")
-
-		title= title || 'Campbell Realty'
-		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
-
-		//- Customise the stylesheet for your site by editing /public/styles/site.sass
-		link(href="/styles/site.css", rel="stylesheet")
-		link(href="/styles/home.css", rel="stylesheet")
-
-		//- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
-		//- Safely remove this block if you are not targeting IE8
-		//-[if lt IE 9]
-			script(src="//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js")
-			script(src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js")
-		//-[endif]
-
-		//- Include template-specific stylesheets by extending the css block
-		block css
-
-		//- Add any other template-specific HEAD tags by extending the head block
-		block head
+		+head-content()
 
 	//- HTML BODY
 	body.home
