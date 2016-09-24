@@ -2,10 +2,10 @@ mixin head-content()
 	meta(charset="utf-8")
 	meta(name="viewport", content="width=device-width, initial-scale=1.0")
 	meta(http-equiv="X-UA-Compatible" content="IE=edge")
-	meta(description="Eric Campbell real estate agent. Serving Utah: Park City, Herber Valley and Salt Lake Valley")
+	meta(name="description" content="Eric Campbell real estate agent. Serving Utah: Park City, Herber Valley and Salt Lake Valley")
 
 	- var shinySection = section.split(' ').map(function(word) { return word.charAt(0).toUpperCase() + word.substr(1); }).join(' ');
-	title= 'Utah Real Estate | Park City, Herber Valley and Salt Lake Valley | Eric Campbell | ' + shinySection
+	title=  shinySection + ' | Park City Utah Real Estate Agent - Eric Campbell';
 	link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
 
 	//- Customise the stylesheet for your site by editing /public/styles/site.sass
