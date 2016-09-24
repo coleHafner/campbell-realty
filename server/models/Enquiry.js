@@ -44,7 +44,7 @@ Enquiry.schema.methods.sendNotificationEmail = function (callback) {
 	keystone.list('User')
 		.model
 		.findOne()
-		.where('isAdmin', true)
+		.where('email', 'eric@blueroof.com')
 		.exec(function (err, admins) {
 			if (err) return callback(err);
 			sendEmail({
