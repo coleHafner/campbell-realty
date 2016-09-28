@@ -1,7 +1,7 @@
 extends ../../layouts/default
 
 mixin post(post)
-	.post(data-ks-editable=editable(user, { list: 'Listing', id: post.id }))
+	.post(data-ks-editable=editable(user, { list: 'posts', id: post.id }))
 		h2: a(href='/blog/' + post.slug)= post.title
 		p.lead.text-muted 
 			if post.publishedDate
